@@ -3,7 +3,7 @@ import React from 'react';
 
 function InventoryTable({ data }) {
   return (
-    <div className="table-responsive">
+    <div className="table-responsive container">
       <h2 className="mb-4">Inventory</h2>
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
@@ -13,6 +13,7 @@ function InventoryTable({ data }) {
             <th>Quantity</th>
             <th>Cost Price</th>
             <th>Selling Price</th>
+            <th>Profit</th>
           </tr>
         </thead>
         <tbody>
@@ -21,8 +22,9 @@ function InventoryTable({ data }) {
               <td>{item._id}</td>
               <td>{item.name}</td>
               <td>{item.quantity}</td>
-              <td>Rs{item.cost_price.toFixed(2)}</td>
-              <td>Rs{item.selling_price.toFixed(2)}</td>
+              <td>Rs {item.cost_price.toFixed(2)}</td>
+              <td>Rs {item.selling_price.toFixed(2)}</td>
+              <td>Rs {item.selling_price.toFixed(2) - item.cost_price.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

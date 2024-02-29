@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Inventory from './components/inventory';
 import Sales from './components/sales';
@@ -22,7 +22,7 @@ function App() {
 
   return (
   <Router>
-      <div className="container">
+      <div className="container" >
   
         <Routes>
           <Route path="/inventory/" Component={Inventory}></Route>
