@@ -1,5 +1,6 @@
 // AddProduct.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function AddProduct({ onAddProduct }) {
   const [productName, setProductName] = useState('');
@@ -15,36 +16,36 @@ function AddProduct({ onAddProduct }) {
 
     const productData = {
       name: productName,
-      quantity: quantity,
-      cost_price: costPrice,
-      selling_price: sellingPrice
+      quantity: Number(quantity),
+      cost_price: Number(costPrice),
+      selling_price: Number(sellingPrice)
     };
 
     try {
       const response = await fetch('http://localhost:8000/addProduct', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(productData)
       });
 
       const data = await response.json();
-      setMessage(data.message);
+      setMessage("Data inserted");
+      console.log(data)
 
-      if (data.success) {
-        onAddProduct(); // Notify parent component that a product has been added
+      if (data) {
         setProductName('');
         setQuantity('');
         setCostPrice('');
         setSellingPrice('');
       }
+
     } catch (error) {
       console.error('Error adding product:', error);
       setMessage('Failed to add product. Please try again later.');
     }
 
     setLoading(false);
+    // Redirect logic goes here
+    // window.location.href = "/inventory"; // Change "/redirect-path" to your desired redirect URL
   };
 
   return (
@@ -67,10 +68,14 @@ function AddProduct({ onAddProduct }) {
           <label htmlFor="sellingPrice">Selling Price</label>
           <input type="number" className="form-control" id="sellingPrice" value={sellingPrice} onChange={(e) => setSellingPrice(e.target.value)} required />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Adding...' : 'Add Product'}
-        </button>
+        <div className="d-flex justify-content-between align-items-center mb-3" style={{"marginTop": 20}}>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? 'Adding...' : 'Add Product'}
+              </button>
+              <Link to='/inventory'><button className="btn btn-primary">Go Back</button></Link>
+        </div>
         {message && <p className="mt-3">{message}</p>}
+        
       </form>
     </div>
   );
