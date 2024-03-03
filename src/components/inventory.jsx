@@ -29,14 +29,9 @@ function Inventory() {
         handleGetInventory()
     }
 
-    function updateProduct(id, item){
-        console.log(id)
-        // const updatedInventory = inventory.filter(product => product.id !== id);
-        // console.log(updatedInventory)
-        // setInventory(updatedInventory);
-
-        // //Get the new Inventory
-        // handleGetInventory()
+    function updateProduct(){
+        //Get the new Inventory
+        handleGetInventory()
     }
 
     return (

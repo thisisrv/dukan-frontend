@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 function InventoryTable(props) {
 
   const [editedItem, setEditedItem] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
+  const [editedItemId, setEditedItemId] = useState(null);
 
   const handleDelete = (productId) => {
     // Make API call to delete the product with the given productId
@@ -42,7 +42,10 @@ function InventoryTable(props) {
           // Clear editedItem state
           setEditedItem({});
           // Exit editing mode
-          setIsEditing(false);
+          setEditedItemId(null);
+
+          //Refresh inventory
+          props.onUpdateProduct();
         } else {
           // Handle error
           console.error('Failed to update product');
@@ -80,7 +83,7 @@ function InventoryTable(props) {
           {props.data.map((item) => (
             <tr key={item._id}>
               <td>{item._id}</td>
-              <td>{isEditing ? (
+              <td>{editedItemId === item._id ? (
                   <input
                     type="text"
                     value={editedItem.name || item.name}
@@ -90,7 +93,7 @@ function InventoryTable(props) {
                   item.name
                 )}
                 </td>
-              <td>{isEditing ? (
+              <td>{editedItemId === item._id ? (
                   <input
                     type="text"
                     value={editedItem.quantity || item.quantity}
@@ -100,40 +103,40 @@ function InventoryTable(props) {
                   item.quantity
                 )}
                 </td>
-              <td>Rs {isEditing ? (
+              <td>Rs {editedItemId === item._id ? (
                   <input
                     type="text"
-                    value={editedItem.cost_price || item.cost_price.toFixed(2)}
+                    value={editedItem.cost_price || item.cost_price}
                     onChange={(e) => handleEdit('cost_price', Number(e.target.value))}
                   />
                 ) : (
-                  `Rs ${item.cost_price.toFixed(2)}`
+                  `Rs ${item.cost_price}`
                 )}
                 </td>
-              <td>Rs {isEditing ? (
+              <td>Rs {editedItemId === item._id ? (
                   <input
                     type="text"
-                    value={editedItem.selling_price || item.selling_price.toFixed(2)}
+                    value={editedItem.selling_price || item.selling_price}
                     onChange={(e) => handleEdit('selling_price', Number(e.target.value))}
                   />
                 ) : (
-                  `Rs ${item.selling_price.toFixed(2)}`
+                  `Rs ${item.selling_price}`
                 )}
               </td>
-              <td>Rs {item.selling_price.toFixed(2) - item.cost_price.toFixed(2)}</td>
+              <td>Rs {item.selling_price - item.cost_price}</td>
               <td>
-                {isEditing ? (
+                {editedItemId === item._id? (
                     <button onClick={() => handleUpdate(item._id)} className="btn btn-success mb-3">
                       Submit
                     </button>
                   ) : (
-                    <button onClick={() => setIsEditing(true)} className="btn btn-success mb-3">
+                    <button onClick={() => setEditedItemId(item._id)} className="btn btn-success mb-3">
                       Edit
                     </button>
                   )}
                 {/* Delete button with onClick event to handle deletion */}
-                {isEditing ? (
-                    <button onClick={() => setIsEditing(false)} className="btn btn-primary mb-3">
+                {editedItemId === item._id ? (
+                    <button onClick={() => setEditedItemId(null)} className="btn btn-primary mb-3">
                       Back
                     </button>
                   ) : (
