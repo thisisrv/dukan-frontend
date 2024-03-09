@@ -2,10 +2,39 @@
 import React from 'react';
 
 function TotalTable({ addedItems }) {
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth() + 1;
+  const year = currentDate.getFullYear();
+
   const totalItems = addedItems.reduce((total, item) => total + item.quantity, 0);
   const totalCostPrice = addedItems.reduce((total, item) => total + item.cost_price, 0);
   const totalSellingPrice = addedItems.reduce((total, item) => total + item.selling_price, 0);
   const totalProfit = totalSellingPrice - totalCostPrice;
+
+  const handleGenerateBill = () => {
+    // Create the request body including the addedItems and date
+    const requestBody = {
+      date: `${day}-${month}-${year}`,
+      items: addedItems
+    };
+
+    // Make a POST request to your API endpoint
+    fetch(`http://localhost:8000/addSale`, {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+    }).then(response => {
+        // Handle success
+        console.log('Bill generated successfully:', response.data);
+        // Redirect to localhost:3000/sales
+        window.location.href = 'http://localhost:3000/sales';
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error generating bill:', error);
+      });
+  };
+
 
   return (
     <div className='container mt-4'>
@@ -28,7 +57,7 @@ function TotalTable({ addedItems }) {
           </tr>
         </tbody>
       </table>
-      <button type="button" className="btn btn-success">Add Sale</button>
+      <button type="button" className="btn btn-success" onClick={handleGenerateBill}>Generate Bill</button>
     </div>
   );
 }

@@ -8,6 +8,7 @@ function AddSales() {
   const day = currentDate.getDate();
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
+
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -91,7 +92,7 @@ function AddSales() {
 
   return (
     <div className="container mt-4">
-      <h1>Record Sales ({day + "-" + month + "-" + year})</h1>
+      <h1>Record Sales ({`${day}-${month}-${year}`})</h1>
       <form>
         <label htmlFor="product">Select Product:</label>
         <select className="form-control mb-2" id="product" value={selectedProduct} onChange={handleProductChange}>
