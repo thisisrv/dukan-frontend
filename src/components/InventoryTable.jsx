@@ -110,7 +110,7 @@ function InventoryTable(props) {
                     onChange={(e) => handleEdit('cost_price', Number(e.target.value))}
                   />
                 ) : (
-                  `Rs ${item.cost_price}`
+                  `${item.cost_price}`
                 )}
                 </td>
               <td>Rs {editedItemId === item._id ? (
@@ -120,7 +120,7 @@ function InventoryTable(props) {
                     onChange={(e) => handleEdit('selling_price', Number(e.target.value))}
                   />
                 ) : (
-                  `Rs ${item.selling_price}`
+                  `${item.selling_price}`
                 )}
               </td>
               <td>Rs {item.selling_price - item.cost_price}</td>

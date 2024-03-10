@@ -6,6 +6,7 @@ import Sales from './components/sales';
 import AddSales from "./components/AddSale";
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import AddProduct from './components/AddProduct';
+import getSales from './components/getSales';
 
 function Home(){
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/sales" Component={Sales}></Route>
           <Route path="/sales/addsales" Component={AddSales}></Route>
           <Route path='/' Component={Home}></Route>
+          <Route path="/sales/getSales" Component={getSales}></Route>
         </Routes>
       </div>
   </Router>
