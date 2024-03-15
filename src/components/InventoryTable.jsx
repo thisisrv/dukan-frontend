@@ -10,7 +10,7 @@ function InventoryTable(props) {
   const handleDelete = (productId) => {
     // Make API call to delete the product with the given productId
     console.log(productId)
-    fetch('http://localhost:8000/deleteProduct/' + productId, {method: "POST"}
+    fetch('https://backend.dukanwale.in/deleteProduct/' + productId, {method: "POST"}
     ).then((response) => {
         if (response.ok) {
           // If the deletion is successful, refresh the inventory
@@ -30,7 +30,7 @@ function InventoryTable(props) {
     // Make API call to update the product with the given productId
     console.log('Updated Item:', editedItem);
     // Assuming your API endpoint for updating an item is '/updateProduct/:productId'
-    fetch(`http://localhost:8000/updateProduct/${productId}`, {
+    fetch(`https://backend.dukanwale.in/updateProduct/${productId}`, {
       method: 'POST',
       body: JSON.stringify(editedItem),
     })

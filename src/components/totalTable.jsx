@@ -20,14 +20,14 @@ function TotalTable({ addedItems }) {
     };
 
     // Make a POST request to your API endpoint
-    fetch(`http://localhost:8000/addSale`, {
+    fetch(`https://backend.dukanwale.in/addSale`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
     }).then(response => {
         // Handle success
         console.log('Bill generated successfully:', response.data);
         // Redirect to localhost:3000/sales
-        window.location.href = 'http://localhost:3000/sales';
+        window.location.href = 'https://dukanwale.in/sales';
       })
       .catch(error => {
         // Handle error

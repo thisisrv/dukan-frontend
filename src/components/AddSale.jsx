@@ -15,7 +15,7 @@ function AddSales() {
   const [addedItems, setAddedItems] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/products')
+    axios.get('https://backend.dukanwale.in/products')
       .then(response => {
         setProducts(response.data);
       })
