@@ -10,7 +10,7 @@ function Inventory() {
     const handleGetInventory = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:8000/products');
+            const response = await fetch('https://backend.dukanwale.in/products');
             const data = await response.json();
             setInventory(data);
         } catch (error) {

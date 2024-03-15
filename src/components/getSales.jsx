@@ -15,7 +15,7 @@ function GetSales(){
         e.preventDefault();
         try {
           // Make a GET request to your API endpoint with formattedDate
-          const response = await fetch("http://localhost:8000/sales/" + date);
+          const response = await fetch("https://backend.dukanwale.in/sales/" + date);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
