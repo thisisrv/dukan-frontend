@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ResponseTable from './responseTable';
+import { Link } from 'react-router-dom';
 
 
 function GetSales(){
@@ -25,7 +26,11 @@ function GetSales(){
           console.error('Error:', error);
         }
       };
-  
+      
+    function handleReset(){
+        setDate('')
+        setResponseData(null)
+    }
     return (
         <div>
           <h2>Select a Date</h2>
@@ -40,7 +45,12 @@ function GetSales(){
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+
+            <div className='d-flex justify-content-between align-items-center mt-3'>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={handleReset}>Reset</button>
+                <Link to="/sales"><button type="submit" className="btn btn-primary">Go Back</button></Link>
+            </div>
           </form>
           {responseData !== null && <ResponseTable response={responseData}/>}
         </div>
