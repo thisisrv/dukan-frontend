@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SalesTable from './salesTable';
 import TotalTable from './totalTable';
+// import DateInput from './date';
 
 function AddSales() {
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
+  // const currentDate = new Date();
+  // const day = currentDate.getDate();
+  // const month = currentDate.getMonth() + 1;
+  // const year = currentDate.getFullYear();
 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addedItems, setAddedItems] = useState([]);
+  const [date, setDate] = useState('');
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
 
   useEffect(() => {
     axios.get('https://backend.dukanwale.in/products')
@@ -92,7 +98,13 @@ function AddSales() {
 
   return (
     <div className="container mt-4">
-      <h1>Record Sales ({`${day}-${month}-${year}`})</h1>
+      <h1>Record Sales <input
+          type="date"
+          className="form-control"
+          id="dateInput"
+          value={date}
+          onChange={handleDateChange}
+        /></h1>
       <form>
         <label htmlFor="product">Select Product:</label>
         <select className="form-control mb-2" id="product" value={selectedProduct} onChange={handleProductChange}>
@@ -108,7 +120,7 @@ function AddSales() {
       </form>
       
       {addedItems.length > 0 && <SalesTable addedItems={addedItems} handleEditSellingPrice={handleEditSellingPrice} handleRemoveItem={handleRemoveItem}/>}
-      {addedItems.length > 0 && <TotalTable addedItems={addedItems} />}
+      {addedItems.length > 0 && <TotalTable addedItems={addedItems} date={date}/>}
     </div>
   );
 }

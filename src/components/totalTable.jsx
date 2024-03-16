@@ -1,11 +1,11 @@
 // TotalTable.js
 import React from 'react';
 
-function TotalTable({ addedItems }) {
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
+function TotalTable({ addedItems, date }) {
+  // const currentDate = new Date();
+  // const day = currentDate.getDate();
+  // const month = currentDate.getMonth() + 1;
+  // const year = currentDate.getFullYear();
 
   const totalItems = addedItems.reduce((total, item) => total + item.quantity, 0);
   const totalCostPrice = addedItems.reduce((total, item) => total + item.cost_price, 0);
@@ -15,7 +15,7 @@ function TotalTable({ addedItems }) {
   const handleGenerateBill = () => {
     // Create the request body including the addedItems and date
     const requestBody = {
-      date: `${day}-${month}-${year}`,
+      date: date,
       items: addedItems
     };
 
@@ -27,7 +27,7 @@ function TotalTable({ addedItems }) {
         // Handle success
         console.log('Bill generated successfully:', response.data);
         // Redirect to localhost:3000/sales
-        window.location.href = 'https://dukanwale.in/sales';
+        window.location.href = '/sales';
       })
       .catch(error => {
         // Handle error
@@ -38,7 +38,7 @@ function TotalTable({ addedItems }) {
 
   return (
     <div className='container mt-4'>
-      <h2>Total</h2>
+      <h2>Total Bill on {date}</h2>
       <table className="table mt-4">
         <thead className="thead-dark">
           <tr>

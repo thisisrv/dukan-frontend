@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 
 function GetSales(){
-    const [date, setDate] = useState('');
     const [responseData, setResponseData] = useState(null)
 
-    const handleChange = event => {
+    const [date, setDate] = useState('');
+
+    const handleDateChange = (event) => {
       setDate(event.target.value);
     };
     
@@ -38,12 +39,12 @@ function GetSales(){
             <div className="form-group">
               <label htmlFor="dateInput">Enter Date (3-3-2024 OR 12-4-2024):</label>
               <input
-                type="text"
-                id="dateInput"
-                className="form-control"
-                value={date}
-                onChange={handleChange}
-              />
+              type="date"
+              className="form-control"
+              id="dateInput"
+              value={date}
+              onChange={handleDateChange}
+            />
             </div>
 
             <div className='d-flex justify-content-between align-items-center mt-3'>
