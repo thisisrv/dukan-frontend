@@ -27,7 +27,7 @@ function TotalTable({ addedItems, date }) {
         // Handle success
         console.log('Bill generated successfully:', response.data);
         // Redirect to localhost:3000/sales
-        window.location.href = '/sales';
+        window.location.reload();
       })
       .catch(error => {
         // Handle error
