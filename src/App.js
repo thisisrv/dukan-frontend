@@ -4,21 +4,13 @@ import './App.css';
 import Inventory from './components/inventory';
 import Sales from './components/sales';
 import AddSales from "./components/AddSale";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AddProduct from './components/AddProduct';
 import getSales from './components/getSales';
+import Authenticate from './authenticate/authenticate';
+import Home from './authenticate/home';
 
-function Home(){
-  return (
-        <div>
-        <h1 className="my-4 heading" > Greetings from RV Enterprises</h1>
-        <div className="d-flex justify-content-between align-items-center mb-3">
-        <Link to="/inventory"><button className="btn btn-primary" style={{ width: "100px" }}>Inventory</button></Link>
-        <Link to="/sales"><button className="btn btn-success" style={{ width: "100px" }}>Sales</button></Link>
-        </div>
-        </div>
-    );
-}
+
 function App() {
 
   return (
@@ -30,7 +22,8 @@ function App() {
           <Route path='/inventory/addProduct' Component={AddProduct}></Route>
           <Route path="/sales" Component={Sales}></Route>
           <Route path="/sales/addsales" Component={AddSales}></Route>
-          <Route path='/' Component={Home}></Route>
+          <Route path='/dashboard' Component={Home}></Route>
+          <Route path='/' Component={Authenticate}></Route>
           <Route path="/sales/getSales" Component={getSales}></Route>
         </Routes>
       </div>

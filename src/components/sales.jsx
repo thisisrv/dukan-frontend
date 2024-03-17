@@ -8,7 +8,7 @@ function Sales(){
         <div className="d-flex justify-content-between align-items-center mb-3">
             <Link to='/sales/getSales'><button className="btn btn-primary">Get Sales</button></Link>
             <Link to='/sales/addSales'><button className="btn btn-primary">Add Sales</button></Link>
-            <Link to='/'><button className="btn btn-success">Go Back</button></Link>
+            <Link to='/dashboard'><button className="btn btn-success">Go Back</button></Link>
         </div>
         </div>
     );

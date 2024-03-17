@@ -43,7 +43,7 @@ function Inventory() {
                 </button>
                 
                 <Link to='/inventory/addProduct'><button className="btn btn-primary">Add Product</button></Link>
-                <Link to='/'><button className="btn btn-primary">Go Back</button></Link>
+                <Link to='/dashboard'><button className="btn btn-primary">Go Back</button></Link>
             </div>
 
 
